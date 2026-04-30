@@ -27,13 +27,17 @@ class StudentController extends Controller
         return response()->json($student, 201);
     }
 
-    public function show(Student $student): JsonResponse
+    public function show(int $id): JsonResponse
     {
+        $student = Student::findOrFail($id);
+
         return response()->json($student);
     }
 
-    public function update(Request $request, Student $student): JsonResponse
+    public function update(Request $request, int $id): JsonResponse
     {
+        $student = Student::findOrFail($id);
+
         $validated = $request->validate([
             'name' => ['sometimes', 'required', 'string', 'max:255'],
             'email' => ['sometimes', 'required', 'email', 'max:255', Rule::unique('students', 'email')->ignore($student->id)],
@@ -45,8 +49,10 @@ class StudentController extends Controller
         return response()->json($student);
     }
 
-    public function destroy(Student $student): JsonResponse
+    public function destroy(int $id): JsonResponse
     {
+        $student = Student::findOrFail($id);
+
         $student->delete();
 
         return response()->json([

@@ -7,6 +7,41 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
+## Student REST API
+
+Base URL:
+
+```text
+http://localhost/studentrecordsystem/api
+```
+
+Postman headers for requests with JSON bodies:
+
+```text
+Accept: application/json
+Content-Type: application/json
+```
+
+Endpoints:
+
+| Method | Endpoint | Description |
+| --- | --- | --- |
+| GET | `/api/students` | Retrieve all student records |
+| POST | `/api/students` | Create a new student |
+| GET | `/api/students/{id}` | Retrieve a specific student |
+| PUT | `/api/students/{id}` | Update a student |
+| DELETE | `/api/students/{id}` | Delete a student |
+
+Example POST/PUT JSON body:
+
+```json
+{
+  "name": "christian C. trimucha",
+  "email": "chuantrimucha2016@gmail.com",
+  "course": "BS Information Technology"
+}
+```
+
 ## About Laravel
 
 Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:

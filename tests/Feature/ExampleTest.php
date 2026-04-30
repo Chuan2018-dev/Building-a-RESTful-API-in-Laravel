@@ -2,18 +2,20 @@
 
 namespace Tests\Feature;
 
-// use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
 use Tests\TestCase;
 
 class ExampleTest extends TestCase
 {
-    /**
-     * A basic test example.
-     */
-    public function test_the_application_returns_a_successful_response(): void
+    public function test_student_api_routes_are_registered(): void
     {
-        $response = $this->get('/');
+        $routes = Route::getRoutes();
 
-        $response->assertStatus(200);
+        $this->assertSame('App\Http\Controllers\StudentController@index', $routes->match(Request::create('/api/students', 'GET'))->getActionName());
+        $this->assertSame('App\Http\Controllers\StudentController@store', $routes->match(Request::create('/api/students', 'POST'))->getActionName());
+        $this->assertSame('App\Http\Controllers\StudentController@show', $routes->match(Request::create('/api/students/1', 'GET'))->getActionName());
+        $this->assertSame('App\Http\Controllers\StudentController@update', $routes->match(Request::create('/api/students/1', 'PUT'))->getActionName());
+        $this->assertSame('App\Http\Controllers\StudentController@destroy', $routes->match(Request::create('/api/students/1', 'DELETE'))->getActionName());
     }
 }
